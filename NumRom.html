@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Números Arábicos para Romanos</title>
+  
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 2vw;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        
+        body::after {
+            content: "";
+            background-image: url(img/romabg.jpg);
+            opacity: 0.8;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            z-index: -1;
+        }
+        
+        img {
+            opacity: 0.9;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            border: 1px solid rgba(51, 51, 51, 0.9);
+            border-radius: 10px;
+            margin-top: 5vh;
+            padding: 2vh;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            background-color: rgba(51, 51, 51, 0.9);
+        }
+        
+        h1 {
+            color: #c9c9c9;
+            font-size: 2.5vw;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #bebcbc;
+            transition: color 1.2s;
+        }
+        
+        a:hover {
+            color: #353535;
+        }
+        
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 2vh;
+            color: #8f8f8f;
+            font-size: 15px;
+        }
+        
+        input[type="number"] {
+            padding: 1vh;
+            font-size: 2.5vh;
+            border-radius: 20px;
+        }
+        
+        input:focus {
+            border-radius: 5px;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+        }
+        
+        button {
+            padding: 1.5vh 2.5vw;
+            font-size: 2.5vh;
+            background-color: #628162;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 1.2s;
+            border-radius: 10px;
+        }
+        
+        button:hover {
+            background-color: #333;
+        }
+        
+        p {
+            margin-top: 2vh;
+            font-size: 2vh;
+            color: #fcfcfc;
+        }
+        
+        footer {
+            color: #d3d3d3;
+            margin-top: 5vh;
+            background-color: #628162;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            border-radius: 3px;
+            padding: 2vh;
+        }
+        
+
+    </style>
+
+</head>
+
+<body>
+  
+  <div class="container">
+     <h1>Conversor de Números Arábicos para Romanos</h1>
+     <label for="arabicNumber">Digite o valor em Número Arábico a ser convertido</label>
+     <input type="number" id="arabicNumber" min="1" max="3999">
+     <button onclick="convertToRoman()">Converter</button>
+     <p id="romanNumber"></p>
+  </div>
+     
+  <footer>
+    <i>Desenvolvido por: <a target="_blank" href="https://github.com/americapolly"><b>Pollyane America</b></a></i>
+  </footer>
+
+  <script>
+
+        function convertToRoman() {
+            var arabicNumber = parseInt(document.getElementById("arabicNumber").value);
+            
+            if (isNaN(arabicNumber) || arabicNumber < 1 || arabicNumber > 3999) {
+            document.getElementById("romanNumber").innerHTML = "Número inválido. Insira um número entre 1 e 3999.";
+            return;
+            }
+            
+            var romanNumber = "";
+            var romanNumerals = [
+            { value: 1000, numeral: "M" },
+            { value: 900, numeral: "CM" },
+            { value: 500, numeral: "D" },
+            { value: 400, numeral: "CD" },
+            { value: 100, numeral: "C" },
+            { value: 90, numeral: "XC" },
+            { value: 50, numeral: "L" },
+            { value: 40, numeral: "XL" },
+            { value: 10, numeral: "X" },
+            { value: 9, numeral: "IX" },
+            { value: 5, numeral: "V" },
+            { value: 4, numeral: "IV" },
+            { value: 1, numeral: "I" }
+            ];
+            
+            for (var i = 0; i < romanNumerals.length; i++) {
+                while (arabicNumber >= romanNumerals[i].value) {
+                  romanNumber += romanNumerals[i].numeral;
+                  arabicNumber -= romanNumerals[i].value;
+                }
+            }
+            
+              var romanNumberElement = document.getElementById("romanNumber");
+              romanNumberElement.innerHTML = "Número Romano: " + romanNumber;
+              romanNumberElement.style.fontSize = "15px"; 
+            
+        }
+
+    </script>
+
+</body>
+</html>
